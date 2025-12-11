@@ -20,64 +20,6 @@
 #define CHEMIN -2
 
 
-//****************************************************
-// Programme principal
-// Cree le labyrinthe, cherche le chemin et l'affiche
-//****************************************************
-#include"fonctionslabyrinthe.h"
-
-int main(){	
-	int labyrinthe[N][M];
-	int lgmin;		// longueur du chemin le plus court
-	
-	srand(time(0));
-	system("clear");
-
-	creer_lab(labyrinthe);
-	afficher_lab(labyrinthe);
-	sleep(1);
-/*
-	if(chercher_chemin(labyrinthe,N-1,M-1,0,0)){
-		marquer_chemin(labyrinthe,0,0,&lgmin);
-		system("clear");
-		afficher_lab(labyrinthe);
-		printf("Chemin le plus court de longueur %i\n",lgmin);
-	}
-	else
-		printf("Pas de chemin solution\n");
-*/
-	return EXIT_SUCCESS;
-}
-
-//*******************************
-// Partie affichage du labyrinthe
-//*******************************
-
-// Couleurs disponibles
-#define BLACK_COLOR        30
-#define DARK_RED_COLOR     31
-#define DARK_GREEN_COLOR   32
-#define YELLOW_COLOR       33
-#define DARK_BLUE_COLOR    34
-#define PURPLE_COLOR       35
-#define DARK_CYAN_COLOR    36
-#define LIGHT_GRAY_COLOR   37
-#define GRAY_COLOR         90
-#define RED_COLOR          91
-#define GREEN_COLOR        92
-#define ORANGE_COLOR       93
-#define BLUE_COLOR         94
-#define MAGENTA_COLOR      95
-#define CYAN_COLOR         96
-#define WHITE_COLOR        97
-
-#define DEFAULT_CHAR_COLOR 97
-
-void couleur(int id_couleur){
-// Modifie la couleur d'affichage des prochains caracteres
-
-    printf("\033[%dm", id_couleur);
-}
 
 
 //******************************
