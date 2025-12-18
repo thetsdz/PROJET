@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 
+//définition du type bloc
 typedef struct {
     Vector3 pos;
     float width;
