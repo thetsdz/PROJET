@@ -4,7 +4,6 @@
 #include <time.h>
 #include <math.h>
 
-//définition du type bloc
 typedef struct {
     Vector3 pos;
     float width;
@@ -77,12 +76,12 @@ int main(void){
         if(IsKeyPressed(KEY_ESCAPE)) break;
 
         // --- Rotation caméra avec flèches ---
-        if(IsKeyDown(KEY_Q))  yaw += rotationSpeed;
-        if(IsKeyDown(KEY_D)) yaw -= rotationSpeed;
+        if(IsKeyDown(KEY_LEFT))  yaw += rotationSpeed;
+        if(IsKeyDown(KEY_RIGHT)) yaw -= rotationSpeed;
 
         // --- Rotation caméra souris ---
         Vector2 mouseDelta = GetMouseDelta();
-        yaw -= mouseDelta.x * 0.003f;
+        yaw += mouseDelta.x * 0.003f;
         pitch -= mouseDelta.y * 0.003f;
         if(pitch > 1.5f) pitch = 1.5f;
         if(pitch < -1.5f) pitch = -1.5f;
@@ -106,7 +105,7 @@ int main(void){
 
         // --- Déplacement tentative cube ---
         Vector3 nextPos = cubePos;
-        if(IsKeyDown(KEY_W)){
+        if(IsKeyDown(KEY_UP)){
             nextPos.x += forward.x * speed;
             nextPos.z += forward.z * speed;
         }
