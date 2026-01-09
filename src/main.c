@@ -25,6 +25,7 @@ int main(void){
     DisableCursor();
     srand(time(NULL));
 
+    int fps = GetFPS();
     // --- Cube joueur ---
     Vector3 cubePos = {0, 0.5f, 0};
     float cubeSize = 1.0f;
@@ -51,16 +52,16 @@ int main(void){
     // --- Blocs solides ---
     Block blocks[NUM_BLOCKS] = {
         // Blocs classiques
-        {{2, 0.5f, 2}, 2, 1, 2, DARKGRAY},
-        {{-3, 1.0f, 4}, 3, 1, 3, DARKGRAY},
-        {{5, 1.5f, -2}, 2, 1, 2, DARKGRAY},
-        {{-2, 2.0f, -3}, 4, 1, 2, DARKGRAY},
-        {{0, 3.0f, 5}, 2, 1, 2, DARKGRAY},
+        {{2, 0.5f, 2}, 2, 1, 2, BROWN},
+        {{-3, 1.0f, 4}, 3, 1, 3, BROWN},
+        {{5, 1.5f, -2}, 2, 1, 2, BROWN},
+        {{-2, 2.0f, -3}, 4, 1, 2, BROWN},
+        {{0, 3.0f, 5}, 2, 1, 2, BROWN},
         // Bordure (hauteur 3)
-        {{0, 1.5f, -25}, 50, 3, 1, GRAY},
-        {{0, 1.5f, 25}, 50, 3, 1, GRAY},
-        {{-25, 1.5f, 0}, 1, 3, 50, GRAY},
-        {{25, 1.5f, 0}, 1, 3, 50, GRAY},
+        {{0, 1.5f, -25}, 50, 6, 1, BLACK},
+        {{0, 1.5f, 25}, 50, 6, 1, BLACK},
+        {{-25, 1.5f, 0}, 1, 6, 50, BLACK},
+        {{25, 1.5f, 0}, 1, 6, 50, BLACK},
         // Plafond invisible
         {{0, 10.0f, 0}, 50, 1, 50, Fade(LIGHTGRAY, 0.0f)}
     };
@@ -79,9 +80,13 @@ int main(void){
         if(IsKeyDown(KEY_LEFT))  yaw += rotationSpeed;
         if(IsKeyDown(KEY_RIGHT)) yaw -= rotationSpeed;
 
+        //rotation avec touches hors flèches
+        if(IsKeyDown(KEY_A))  yaw += rotationSpeed;
+        if(IsKeyDown(KEY_D)) yaw -= rotationSpeed;
+
         // --- Rotation caméra souris ---
         Vector2 mouseDelta = GetMouseDelta();
-        yaw += mouseDelta.x * 0.003f;
+        yaw -= mouseDelta.x * 0.003f;
         pitch -= mouseDelta.y * 0.003f;
         if(pitch > 1.5f) pitch = 1.5f;
         if(pitch < -1.5f) pitch = -1.5f;
@@ -92,7 +97,7 @@ int main(void){
         // --- Accroupissement ---
         float playerHalf = cubeSize/2;
         float baseY = normalHeight;
-        if(IsKeyDown(KEY_DOWN) && onGround) baseY = crouchHeight;
+        if(IsKeyDown(KEY_LEFT_SHIFT) && onGround) baseY = crouchHeight;
 
         // --- Saut ---
         if(IsKeyPressed(KEY_SPACE) && onGround){
@@ -105,7 +110,11 @@ int main(void){
 
         // --- Déplacement tentative cube ---
         Vector3 nextPos = cubePos;
-        if(IsKeyDown(KEY_UP)){
+        if(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)){
+            nextPos.x += forward.x * speed;
+            nextPos.z += forward.z * speed;
+        }
+        if(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)){
             nextPos.x += forward.x * speed;
             nextPos.z += forward.z * speed;
         }
