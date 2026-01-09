@@ -1,0 +1,1 @@
+gcc ..\src\main.c -o main.exe -I..\lib\raylib\include -L..\lib\raylib\lib -lraylib -lopengl32 -lgdi32 -lwinmm
