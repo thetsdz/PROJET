@@ -4,6 +4,17 @@
 #include <time.h>
 #include <math.h>
 
+/**
+ * @file main.c
+ * @brief Programme principal pour mon projet.
+ * @author Thomas Dequirez
+ */
+
+/**
+ * @brief Affiche un message de bienvenue.
+ * @param nom Le nom de l'utilisateur.
+ */
+
 typedef struct {
     Vector3 pos;
     float width;
